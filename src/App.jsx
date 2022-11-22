@@ -40,6 +40,11 @@ export default function App() {
             }
             return newArray
         })
+
+    function deleteNote(event, noteId) {
+        event.stopPropagation() // When trash icon handles click event stop propagating to the parents
+        setNotes(oldNotes => oldNotes.filter((note) => note.id !== noteId))
+    }
     
     function findCurrentNote() {
         return notes.find(note => {
@@ -62,6 +67,7 @@ export default function App() {
                     currentNote={findCurrentNote()}
                     setCurrentNoteId={setCurrentNoteId}
                     newNote={createNewNote}
+                    deleteNote={deleteNote()}
                 />
                 {
                     currentNoteId && 
